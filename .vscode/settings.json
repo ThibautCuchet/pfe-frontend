@@ -1,3 +1,5 @@
 {
-    "tailwindCSS.experimental.classRegex": ["tw`([^`]*)"]
+    "tailwindCSS.experimental.classRegex": ["tw`([^`]*)"],
+    "editor.formatOnSave": true,
+    "javascript.format.enable": true
 }
