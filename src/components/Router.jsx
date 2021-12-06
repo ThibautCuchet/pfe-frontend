@@ -16,12 +16,12 @@ import { Profile } from "../views/Profile";
 
 const Tab = createBottomTabNavigator();
 
-const tabScreenOption = (activeColor, Icon) => {
+const tabScreenOption = (activeColor, Icon, iconProps) => {
   return {
     tabBarShowLabel: false,
     tabBarActiveTintColor: activeColor,
     tabBarInactiveTintColor: "#426260",
-    tabBarIcon: ({ color }) => <Icon color={color} />,
+    tabBarIcon: ({ color }) => <Icon color={color} {...iconProps} />,
   };
 };
 
@@ -41,27 +41,49 @@ export const Router = () => {
       <Tab.Screen
         name="Products"
         component={ProductsList}
-        options={tabScreenOption("#119DB8", ViewGridIcon)}
+        options={({ navigation }) =>
+          tabScreenOption("#119DB8", ViewGridIcon, {
+            active: navigation.isFocused(),
+            title: "Producs",
+          })
+        }
       />
       <Tab.Screen
         name="Favorites"
         component={FavoritesList}
-        options={tabScreenOption("#F8AA00", StarIcon)}
+        options={({ navigation }) =>
+          tabScreenOption("#F8AA00", StarIcon, {
+            active: navigation.isFocused(),
+            title: "Favorites",
+          })
+        }
       />
       <Tab.Screen
         name="Add"
         component={CreateProduct}
-        options={tabScreenOption("#F8AA00", CreateIcon)}
+        options={({ navigation }) =>
+          tabScreenOption("#F8AA00", CreateIcon, navigation.isFocused())
+        }
       />
       <Tab.Screen
         name="Messages"
         component={Messages}
-        options={tabScreenOption("#019670", MessageIcon)}
+        options={({ navigation }) =>
+          tabScreenOption("#019670", MessageIcon, {
+            active: navigation.isFocused(),
+            title: "Messages",
+          })
+        }
       />
       <Tab.Screen
         name="Profile"
         component={Profile}
-        options={tabScreenOption("#E7276C", ProfileIcon)}
+        options={({ navigation }) =>
+          tabScreenOption("#E7276C", ProfileIcon, {
+            active: navigation.isFocused(),
+            title: "Profile",
+          })
+        }
       />
     </Tab.Navigator>
   );
